@@ -1,2 +1,5 @@
-# movies-demo
-## csis 340 database systems
+# CSIS 340 Database Systems
+
+---
+
+### Movies Demo Project
