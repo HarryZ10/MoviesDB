@@ -2,26 +2,80 @@
 # Importing the required libraries
 import xml.etree.ElementTree as Xet
 import pandas as pd
+import requests
 
 cols = ["dir_name", "prod_name", "studio_name", "title", "year", "prc", "cat", "awattr", "awtype", "location"]
 rows = []
 
+# define cols
+dir_name = ""
+prod_name = ""
+studio_name = ""
+title = ""
+year = ""
+prc = ""
+cat = ""
+awattr = ""
+awtype = ""
+location = ""
+
+
 # Parsing the XML file
-xmlparse = Xet.parse('./resource/movies.xml')
-root = xmlparse.getroot()
+url = "http://infolab.stanford.edu/pub/movies/mains243.xml"
+r = requests.get(url)
+root = Xet.fromstring(r.content)
 
-for i in root:
+for directorfilms in root:
 
-    dir_name = i.find("dirn").text
-    prod_name = i.find("prod").text
-    studio_name = i.find("studio").text
-    title = i.find("t").text
-    year = i.find("year").text
-    prc = i.find("prc").text
-    cat = i.find("cat").text
-    award_type = i.find("awtype").text
-    award_attr = i.find("awattr").text
-    location = i.find("loc").text
+    for directorfilm in directorfilms:
+
+        if directorfilm.tag == "director":
+
+            for director in directorfilm:
+
+                if director.tag == "dirname":
+
+                    dir_name = director.text
+
+        if directorfilm.tag == "films":
+
+            for films in directorfilm:
+                
+                for film in films:
+
+                    if film.tag == "t":
+
+                        title = film.text
+                    
+                    if film.tag == "year":
+
+                        year = film.text
+                    
+                    if film.tag == "cat":
+
+                        cat = film.text
+                    
+                    if film.tag == "prc":
+                    
+                        prc = film.text
+                    
+                    if film.tag == "awards":
+
+                        for awards in film:
+
+                            for award in awards:
+
+                                if award.tag == "awattr":
+
+                                    awattr = award.text
+
+                                if award.tag == "awtype":
+
+                                    awtype = award.text
+
+                    if film.tag == "loc":
+                            
+                        location = film.text
 
     rows.append({"dir_name": dir_name,
                  "prod_name": prod_name,
@@ -30,8 +84,8 @@ for i in root:
                  "year": year,
                  "prc": prc,
                  "cat": cat,
-                 "awattr": award_attr,
-                 "awtype": award_type,
+                 "awattr": awattr,
+                 "awtype": awtype,
                  "location": location})
 
 
