@@ -3,3 +3,7 @@
 ---
 
 ### Movies Demo Project
+
+# install `requirements.txt`
+
+pip install -r requirements.txt
