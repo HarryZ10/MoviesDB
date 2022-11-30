@@ -18,7 +18,7 @@ conn = pg.connect(
 cur = conn.cursor()
 
 # Open the file for reading
-actors_path = os.path.join(os.path.dirname(__file__), "awards-persons.csv")
+actors_path = os.path.join(os.path.dirname(__file__), "awards-person.csv")
 f = open(actors_path, "r")
 
 # Read the first line (column names)
@@ -35,8 +35,8 @@ for line in f:
     # Insert the record into the database
 
     cur.execute("""
-        INSERT INTO award_people (stagename, award)
-        VALUES (%s, %s)""", fields)
+        INSERT INTO award_people (stagename, award, awyear)
+        VALUES (%s, %s, %s)""", fields)
     
     # Commit the changes to the database
     conn.commit()

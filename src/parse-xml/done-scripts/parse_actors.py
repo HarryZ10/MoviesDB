@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 
 # cols = ["stagename", "dowstart", "dowend", "lname", "fname", "gender", "dob", "dod", "roletype", "origin", "award"]
-cols = ["stagename", "award"]
+cols = ["stagename", "award", "awyear"]
 rows = []
 
 # define cols
@@ -20,6 +20,7 @@ dod = ""
 roletype = ""
 origin = ""
 award = ""
+awyear = ""
 
 # Parsing the XML file
 url = "http://infolab.stanford.edu/pub/movies/actors63.xml"
@@ -71,8 +72,11 @@ for actors in root:
                         
                         if item.tag == "awtype":
                             award = item.text
+                        
+                        if item.tag == "awyear":
+                            awyear = item.text
 
-                rows.append([stagename, award])
+                rows.append([stagename, award, awyear])
 
     # append to rows the rest who don't have awards
     # append to rows
