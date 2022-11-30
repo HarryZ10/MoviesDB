@@ -43,24 +43,29 @@ for directorfilms in root:
                 
                 for film in films:
 
-                    if film.tag == "t":
+                    # go into <prods>
+                    if film.tag == "prods":
+                        
+                        for prods in film:
 
-                        title = film.text
-                    
-                    if film.tag == "year":
+                            for prod in prods:
 
-                        year = film.text
-                    
-                    if film.tag == "cat":
+                                if prod.tag == "pname":
 
-                        cat = film.text
-                    
-                    if film.tag == "prc":
-                    
-                        prc = film.text
-                    
+                                    prod_name = prod.text
+
                     if film.tag == "awards":
+                        
+                        for awards in film:
 
+                            for award in awards:
+
+                                if award.tag == "awtype":
+
+                                    awtype = award.text
+
+                    if film.tag == "awards":
+                        
                         for awards in film:
 
                             for award in awards:
@@ -69,13 +74,58 @@ for directorfilms in root:
 
                                     awattr = award.text
 
-                                if award.tag == "awtype":
+                    if film.tag == "loc":
+                        
+                        for sites in film:
 
-                                    awtype = award.text
+                            for site in sites:
+
+                                if site.tag == "sitename":
+
+                                    location = site.text
 
                     if film.tag == "loc":
-                            
-                        location = film.text
+
+                        for sites in film:
+
+                            for site in sites:
+
+                                if site.tag == "siteclass":
+
+                                    # also append the siteclass
+                                    location = location + " " + site.text
+
+                    if film.tag == "studios":
+
+                        for studios in film:
+
+                            if studios.tag == "studio":
+
+                                studio_name = studios.text
+
+                    if film.tag == "cats":
+
+                        for cats in film:
+
+                            if cats.tag == "cat":
+
+                                cat = cats.text
+
+                    if film.tag == "prcs":
+
+                        for prcs in film:
+
+                            if prcs.tag == "prc":
+
+                                prc = prcs.text
+
+                    if film.tag == "t":
+
+                        title = film.text
+                    
+                    if film.tag == "year":
+
+                        year = film.text
 
     rows.append({"dir_name": dir_name,
                  "prod_name": prod_name,
@@ -92,4 +142,4 @@ for directorfilms in root:
 df = pd.DataFrame(rows, columns=cols)
 
 # Writing dataframe to csv
-df.to_csv('output.csv')
+df.to_csv('output2.csv')
