@@ -84,17 +84,6 @@ for directorfilms in root:
 
                                     location = site.text
 
-                    if film.tag == "loc":
-
-                        for sites in film:
-
-                            for site in sites:
-
-                                if site.tag == "siteclass":
-
-                                    # also append the siteclass
-                                    location = location + " " + site.text
-
                     if film.tag == "studios":
 
                         for studios in film:
@@ -127,16 +116,16 @@ for directorfilms in root:
 
                         year = film.text
 
-    rows.append({"dir_name": dir_name,
-                 "prod_name": prod_name,
-                 "studio_name": studio_name,
-                 "title": title,
-                 "year": year,
-                 "prc": prc,
-                 "cat": cat,
-                 "awattr": awattr,
-                 "awtype": awtype,
-                 "location": location})
+                rows.append({"dir_name": dir_name,
+                            "prod_name": prod_name,
+                            "studio_name": studio_name,
+                            "title": title,
+                            "year": year,
+                            "prc": prc,
+                            "cat": cat,
+                            "awattr": awattr,
+                            "awtype": awtype,
+                            "location": location})
 
 
 df = pd.DataFrame(rows, columns=cols)
