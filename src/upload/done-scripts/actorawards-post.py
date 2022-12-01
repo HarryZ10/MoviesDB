@@ -18,7 +18,7 @@ conn = pg.connect(
 cur = conn.cursor()
 
 # Open the file for reading
-actors_path = os.path.join(os.path.dirname(__file__), "awards-person.csv")
+actors_path = os.path.join(os.path.dirname(__file__), "actors-person.csv")
 f = open(actors_path, "r")
 
 # Read the first line (column names)

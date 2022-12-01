@@ -4,7 +4,7 @@ import xml.etree.ElementTree as Xet
 import pandas as pd
 import requests
 
-cols = ["dir_name", "prod_name", "studio_name", "title", "year", "prc", "cat", "awattr", "awtype", "location"]
+cols = ["dir_name", "prod_name", "studio_name", "title", "year", "prc", "cat", "awattr", "awtype", "location", "movie_id"]
 rows = []
 
 # define cols
@@ -18,6 +18,7 @@ cat = ""
 awattr = ""
 awtype = ""
 location = ""
+movie_id = ""
 
 
 # Parsing the XML file
@@ -115,6 +116,10 @@ for directorfilms in root:
                     if film.tag == "year":
 
                         year = film.text
+                    
+                    if film.tag == "fid":
+
+                        movie_id = film.text
 
                 rows.append({"dir_name": dir_name,
                             "prod_name": prod_name,
@@ -125,7 +130,20 @@ for directorfilms in root:
                             "cat": cat,
                             "awattr": awattr,
                             "awtype": awtype,
-                            "location": location})
+                            "location": location,
+                            "movie_id": movie_id})
+
+                dir_name = ""
+                prod_name = ""
+                studio_name = ""
+                title = ""
+                year = ""
+                prc = ""
+                cat = ""
+                awattr = ""
+                awtype = ""
+                location = ""
+                movie_id = ""
 
 
 df = pd.DataFrame(rows, columns=cols)

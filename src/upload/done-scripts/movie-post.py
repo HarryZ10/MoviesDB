@@ -32,10 +32,11 @@ for line in f:
     fields[-1] = fields[-1].strip()
 
     print(fields)
+
     # Insert the record into the database
     cur.execute("""
-        INSERT INTO movie (title, rel_year, director, producer, studio, prc, cat, award, lc)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", fields)
+        INSERT INTO movie (title, rel_year, director, producer, studio, prc, cat, award, lc, movie_id)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", fields)
     
     # Commit the changes to the database
     conn.commit()

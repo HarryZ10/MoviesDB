@@ -4,7 +4,7 @@ import xml.etree.ElementTree as Xet
 import pandas as pd
 import requests
 
-# cols = ["stagename", "dowstart", "dowend", "lname", "fname", "gender", "dob", "dod", "roletype", "origin", "award"]
+# cols = ["stagename", "dowstart", "dowend", "lname", "fname", "gender", "dob", "dod", "roletype", "origin"]
 cols = ["stagename", "award", "awyear"]
 rows = []
 
@@ -78,12 +78,30 @@ for actors in root:
 
                 rows.append([stagename, award, awyear])
 
+                stagename = ""
+                award = ""
+                awyear = ""
+
     # append to rows the rest who don't have awards
     # append to rows
     # rows.append([stagename, dowstart, dowend, lname, fname, gender, dob, dod, roletype, origin])
+
+    # # reset variables
+    # stagename = ""
+    # dowstart = ""
+    # dowend = ""
+    # lname = ""
+    # fname = ""
+    # gender = ""
+    # dob = ""
+    # dod = ""
+    # roletype = ""
+    # origin = ""
+    # award = ""
+    # awyear = ""
 
 df = pd.DataFrame(rows, columns=cols)
 
 # Writing dataframe to csv
 # df.to_csv('actors.csv')
-df.to_csv('LEFTOUTAWARDS_ACTORS.csv')
+df.to_csv('actors-person.csv')
