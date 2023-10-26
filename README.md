@@ -1,6 +1,7 @@
 # CSIS 340 Database Systems
 
 ## Movies Demo Project
+- Anyone in CSIS 340 caught forking, cloning, or viewing this repo will be reported to the Academic Dishonesty Committee.
 
 Steps to reproduce:
 - Install `requirements.txt` using `pip` or `poetry` (however you like your Py dependencies handled)
